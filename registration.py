@@ -32,161 +32,166 @@ template = """<?xml version="1.0" encoding="UTF-8"?>
    </size>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Регистрация</string>
   </property>
-  <widget class="QLabel" name="name_label">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>70</y>
-     <width>181</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Имя:</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="name_input">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>100</y>
-     <width>181</width>
-     <height>31</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="email_label">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>140</y>
-     <width>181</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Электронная почта:</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="email_input">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>170</y>
-     <width>181</width>
-     <height>31</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="password_label">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>210</y>
-     <width>181</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Пароль:</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="password_input">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>240</y>
-     <width>181</width>
-     <height>31</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="confirm_password_label">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>280</y>
-     <width>181</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Подтвердите пароль:</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="confirm_password_input">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>310</y>
-     <width>181</width>
-     <height>31</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="register_btn">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>370</y>
-     <width>180</width>
-     <height>60</height>
-    </rect>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>400</width>
-     <height>500</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Зарегистрироваться!</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="error_label">
-   <property name="geometry">
-    <rect>
-     <x>6</x>
-     <y>436</y>
-     <width>391</width>
-     <height>61</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>14</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="register_btn">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>360</y>
+      <width>180</width>
+      <height>60</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>400</width>
+      <height>500</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Зарегистрироваться!</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="confirm_password_input">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>310</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="confirm_password_label">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>280</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Подтвердите пароль:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="password_input">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>239</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="password_label">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>210</y>
+      <width>181</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Пароль:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="email_input">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>169</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="email_label">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>130</y>
+      <width>201</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Электронная почта:(gmail)</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="name_input">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>100</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="name_label">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>75</y>
+      <width>181</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Имя:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="error_label">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>430</y>
+      <width>391</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>
@@ -195,18 +200,17 @@ template = """<?xml version="1.0" encoding="UTF-8"?>
 
 """
 
-
 class Registration(QWidget):
     def __init__(self):
         super().__init__()
         f = io.StringIO(template)
         uic.loadUi(f, self)
         self.register_btn.clicked.connect(self.check)
-        #Написан адрес для моего линукса, на винде поменять!!
-        self.con = sqlite3.connect("/home/linechangerr/projects/Keeps/databases/users_db")
-        self.cur = self.con.cursor()
-
+        
     def check(self):
+        #Написан адрес для моего линукса, на винде поменять!!
+        con = sqlite3.connect("/home/linechangerr/projects/Keeps/databases/users_db")
+        cur = con.cursor()
         error_message = ""
         if not self.name_input.text():
             error_message += "Введите имя!!\n"
@@ -214,6 +218,7 @@ class Registration(QWidget):
             error_message += "Введите email!! "
         elif self.email_input.text()[-10:] != '@gmail.com':
             error_message += "Неверный email!! "
+        # Условие на уже нахождение в таблице
         if not self.password_input.text():
             error_message += "Введите пароль!! "
         elif self.password_input.text() and self.password_input.text() != self.confirm_password_input.text():
@@ -221,13 +226,16 @@ class Registration(QWidget):
         print(error_message)
         self.error_label.setText(error_message)
         if not error_message:
-            command = self.cur.execute(
+            command = cur.execute(
                 f"""INSERT INTO users(name, email, password)
                     VALUES('{self.name_input.text()}',
                            '{self.email_input.text()}',
                            '{self.password_input.text()}')"""
             )
-        self.con.commit()
+        con.commit()
+        con.close()
+        self.close()
+        
 
 
 if __name__ == "__main__":

@@ -1,13 +1,4 @@
-import io
-import sys
-import sqlite3
-
-from sign_in import SignIn
-from add_note import Add
-from PyQt5 import uic
-from PyQt5.QtWidgets import QApplication, QMainWindow
-
-template = """<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>mainWindow</class>
  <widget class="QMainWindow" name="mainWindow">
@@ -406,52 +397,3 @@ p, li { white-space: pre-wrap; }
  <resources/>
  <connections/>
 </ui>
-
-"""
-
-
-class Main(QMainWindow):
-    def __init__(self):
-        super().__init__()
-        f = io.StringIO(template)
-        uic.loadUi(f, self)
-        # Написан адрес для моего линукса, на винде поменять!!
-        self.con = sqlite3.connect("/home/linechangerr/projects/Keeps/databases/users_db")
-        self.cur = self.con.cursor()
-        self.add_btn.clicked.connect(self.add)
-        count = 0
-        self.notes = [
-            self.textBrowser,
-            self.textBrowser_2,
-            self.textBrowser_3,
-            self.textBrowser_4,
-            self.textBrowser_5,
-            self.textBrowser_6,
-            self.textBrowser_7,
-            self.textBrowser_8,
-            self.textBrowser_9,
-        ]
-        for elem in self.notes:
-            if not elem.toPlainText():
-                elem.hide()
-                count += 1
-        if count >= 9:
-            self.none_label.setText('У вас пока нет заметок')
-
-    def add(self):
-        self.add_window = Add()
-        self.add_window.show()
-        file = open('/home/linechangerr/projects/Keeps/clipboard.txt')
-        lines = file.read().split('\n')
-        file.close()
-
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    file = open("/home/linechangerr/projects/Keeps/current_user.txt")
-    if file.read():
-        ex = Main()
-    else:
-        ex = SignIn()
-    ex.show()
-    sys.exit(app.exec_())

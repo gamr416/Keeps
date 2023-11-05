@@ -10,7 +10,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow
 template = """<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>sign_in_window</class>
- <widget class="QMainWindow" name="sign_in_window">
+ <widget class="QWidget" name="sign_in_window">
   <property name="enabled">
    <bool>true</bool>
   </property>
@@ -35,7 +35,7 @@ template = """<?xml version="1.0" encoding="UTF-8"?>
    </size>
   </property>
   <property name="windowTitle">
-   <string>Заметки</string>
+   <string>Вход в Заметки</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="sign_in_btn">
@@ -188,13 +188,14 @@ class SignIn(QMainWindow):
         uic.loadUi(f, self)
         self.sign_in_btn.clicked.connect(self.check)
         self.register_btn.clicked.connect(self.open_register_window)
-        #Написан адрес для моего линукса, на винде поменять!!
-        self.con = sqlite3.connect("/home/linechangerr/projects/Keeps/databases/users_db")
-        self.cur = self.con.cursor()
+        
         
         
 
     def check(self):
+        #Написан адрес для моего линукса, на винде поменять!!
+        self.con = sqlite3.connect("/home/linechangerr/projects/Keeps/databases/users_db")
+        self.cur = self.con.cursor()
         error_message = ''
         if not self.email_input.text():
             error_message += 'Введите email!! '
@@ -202,11 +203,9 @@ class SignIn(QMainWindow):
             error_message += 'Неверный email!! '
         if not self.password_input.text():
             error_message += 'Введите пароль!! '
-
+        #Нету в таблице
         if not error_message:
-
             user_data = self.cur.execute("""SELECT email FROM users""").fetchall()
-            print(user_data)
             right_email = False
             if (self.email_input.text(), ) in user_data:
                     right_email = True
@@ -216,8 +215,15 @@ class SignIn(QMainWindow):
                 if self.password_input.text() == user_password[0][0]:
                     pass
                     #Открытие основного приложения
+                else:
+                    error_message += 'Пароль неверный!!'
+            else:
+                error_message += 'Аккаунта не существует!!'
+        file = open('/home/linechangerr/projects/Keeps/current_user.txt', 'w')
+        file.write(f'{self.email_input.text()}\n{self.password_input.text()}')
         self.error_label.setText(error_message)
-            
+        self.con.close()
+        self.close()
         
     def open_register_window(self):
         self.register_window = Registration()

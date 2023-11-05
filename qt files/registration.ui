@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>registration_window</class>
- <widget class="QMainWindow" name="registration_window">
+ <widget class="QWidget" name="registration_window">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -119,10 +119,10 @@
    <widget class="QLabel" name="email_label">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>140</y>
-      <width>181</width>
-      <height>31</height>
+      <x>100</x>
+      <y>130</y>
+      <width>201</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="font">
@@ -131,7 +131,10 @@
      </font>
     </property>
     <property name="text">
-     <string>Электронная почта:</string>
+     <string>Электронная почта:(gmail)</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLineEdit" name="name_input">

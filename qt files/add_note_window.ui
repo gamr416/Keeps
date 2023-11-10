@@ -47,7 +47,7 @@
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>80</y>
+     <y>50</y>
      <width>300</width>
      <height>40</height>
     </rect>
@@ -61,8 +61,8 @@
   <widget class="QTextEdit" name="text_input">
    <property name="geometry">
     <rect>
-     <x>125</x>
-     <y>180</y>
+     <x>130</x>
+     <y>140</y>
      <width>350</width>
      <height>200</height>
     </rect>
@@ -77,7 +77,7 @@
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>40</y>
+     <y>10</y>
      <width>301</width>
      <height>31</height>
     </rect>
@@ -98,7 +98,7 @@
    <property name="geometry">
     <rect>
      <x>130</x>
-     <y>150</y>
+     <y>100</y>
      <width>341</width>
      <height>20</height>
     </rect>
@@ -119,13 +119,47 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>415</y>
+     <y>435</y>
      <width>401</width>
-     <height>71</height>
+     <height>51</height>
     </rect>
    </property>
    <property name="text">
     <string/>
+   </property>
+  </widget>
+  <widget class="QDateTimeEdit" name="date_input">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>390</y>
+     <width>351</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>356</y>
+     <width>341</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Дата</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
  </widget>

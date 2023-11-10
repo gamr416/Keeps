@@ -1,6 +1,7 @@
 import io
 import sys
 import sqlite3
+import os
 
 from registration import Registration
 from PyQt5 import uic
@@ -193,8 +194,10 @@ class SignIn(QMainWindow):
         
 
     def check(self):
-        #Написан адрес для моего линукса, на винде поменять!!
-        self.con = sqlite3.connect("/home/linechangerr/projects/Keeps/databases/users_db")
+        absolute_path = os.path.dirname(__file__)
+        relative_path = 'databases/users_db'
+        full_path = os.path.join(absolute_path, relative_path)
+        self.con = sqlite3.connect(full_path)
         self.cur = self.con.cursor()
         error_message = ''
         if not self.email_input.text():
@@ -219,11 +222,15 @@ class SignIn(QMainWindow):
                     error_message += 'Пароль неверный!!'
             else:
                 error_message += 'Аккаунта не существует!!'
-        file = open('/home/linechangerr/projects/Keeps/current_user.txt', 'w')
+        absolute_path = os.path.dirname(__file__)
+        relative_path = 'current_user.txt'
+        full_path = os.path.join(absolute_path, relative_path)
+        file = open(full_path, 'w')
         file.write(f'{self.email_input.text()}\n{self.password_input.text()}')
         self.error_label.setText(error_message)
         self.con.close()
         self.close()
+        file.close()
         
     def open_register_window(self):
         self.register_window = Registration()

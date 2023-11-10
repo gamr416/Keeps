@@ -1,5 +1,6 @@
 import io
 import sys
+import os
 
 
 from PyQt5 import uic
@@ -55,7 +56,7 @@ template = """<?xml version="1.0" encoding="UTF-8"?>
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>80</y>
+     <y>50</y>
      <width>300</width>
      <height>40</height>
     </rect>
@@ -69,8 +70,8 @@ template = """<?xml version="1.0" encoding="UTF-8"?>
   <widget class="QTextEdit" name="text_input">
    <property name="geometry">
     <rect>
-     <x>125</x>
-     <y>180</y>
+     <x>130</x>
+     <y>140</y>
      <width>350</width>
      <height>200</height>
     </rect>
@@ -85,7 +86,7 @@ template = """<?xml version="1.0" encoding="UTF-8"?>
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>40</y>
+     <y>10</y>
      <width>301</width>
      <height>31</height>
     </rect>
@@ -106,7 +107,7 @@ template = """<?xml version="1.0" encoding="UTF-8"?>
    <property name="geometry">
     <rect>
      <x>130</x>
-     <y>150</y>
+     <y>100</y>
      <width>341</width>
      <height>20</height>
     </rect>
@@ -127,13 +128,47 @@ template = """<?xml version="1.0" encoding="UTF-8"?>
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>415</y>
+     <y>435</y>
      <width>401</width>
-     <height>71</height>
+     <height>51</height>
     </rect>
    </property>
    <property name="text">
     <string/>
+   </property>
+  </widget>
+  <widget class="QDateTimeEdit" name="date_input">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>390</y>
+     <width>351</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>356</y>
+     <width>341</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Дата</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
  </widget>
@@ -150,7 +185,8 @@ class Add(QWidget):
         f = io.StringIO(template)
         uic.loadUi(f, self)
         self.add_btn.clicked.connect(self.add)
-
+        self.date_input
+        
     def add(self):
         error_message = ""
         if not self.title_input.text():
@@ -159,11 +195,13 @@ class Add(QWidget):
             error_message += "Введите основной текст!! "
         self.error_label.setText(error_message)
         if not error_message:
-            file = open('/home/linechangerr/projects/Keeps/clipboard.txt', 'w')
+            absolute_path = os.path.dirname(__file__)
+            relative_path = 'clipboard.txt'
+            full_path = os.path.join(absolute_path, relative_path)
+            file = open(full_path, 'w')
             file.write(f"{self.title_input.text()}\n{self.text_input.toPlainText()}")
             file.close()
             self.close()
-
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

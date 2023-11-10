@@ -1,7 +1,7 @@
 import io
 import sys
 import sqlite3
-
+import os
 
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QWidget
@@ -208,8 +208,10 @@ class Registration(QWidget):
         self.register_btn.clicked.connect(self.check)
         
     def check(self):
-        #Написан адрес для моего линукса, на винде поменять!!
-        con = sqlite3.connect("/home/linechangerr/projects/Keeps/databases/users_db")
+        absolute_path = os.path.dirname(__file__)
+        relative_path = 'databases/users_db'
+        full_path = os.path.join(absolute_path, relative_path)
+        con = sqlite3.connect(full_path)
         cur = con.cursor()
         error_message = ""
         if not self.name_input.text():
@@ -218,12 +220,10 @@ class Registration(QWidget):
             error_message += "Введите email!! "
         elif self.email_input.text()[-10:] != '@gmail.com':
             error_message += "Неверный email!! "
-        # Условие на уже нахождение в таблице
         if not self.password_input.text():
             error_message += "Введите пароль!! "
         elif self.password_input.text() and self.password_input.text() != self.confirm_password_input.text():
             error_message += "Пароли не совпадают!!"
-        print(error_message)
         self.error_label.setText(error_message)
         if not error_message:
             command = cur.execute(
@@ -231,6 +231,12 @@ class Registration(QWidget):
                     VALUES('{self.name_input.text()}',
                            '{self.email_input.text()}',
                            '{self.password_input.text()}')"""
+            )
+            command_2 = cur.execute(f"""CREATE TABLE "{cur.execute(f'''SELECT id FROM 'users' WHERE name={self.name_input.text()}''').fetchall()[0]}" (
+	                                "number"	INTEGER NOT NULL UNIQUE,
+	                                "note"	text,
+                                    "date"  text,
+	                                PRIMARY KEY("number"));"""
             )
         con.commit()
         con.close()
@@ -243,3 +249,4 @@ if __name__ == "__main__":
     ex = Registration()
     ex.show()
     sys.exit(app.exec_())
+

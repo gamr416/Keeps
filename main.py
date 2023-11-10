@@ -1,6 +1,7 @@
 import io
 import sys
 import sqlite3
+import os
 
 from sign_in import SignIn
 from add_note import Add
@@ -62,10 +63,10 @@ template = """<?xml version="1.0" encoding="UTF-8"?>
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>180</x>
-      <y>70</y>
-      <width>911</width>
-      <height>661</height>
+      <x>50</x>
+      <y>80</y>
+      <width>1121</width>
+      <height>641</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
@@ -243,60 +244,6 @@ p, li { white-space: pre-wrap; }
      </item>
     </layout>
    </widget>
-   <widget class="QPushButton" name="notes_btn">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>180</y>
-      <width>170</width>
-      <height>60</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>16</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Заметки</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="reminders_btn">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>250</y>
-      <width>170</width>
-      <height>60</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>16</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Напоминания</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="question_mark_btn">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>320</y>
-      <width>170</width>
-      <height>60</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>16</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>???</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="profile_btn">
     <property name="geometry">
      <rect>
@@ -401,6 +348,27 @@ p, li { white-space: pre-wrap; }
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>10</y>
+      <width>731</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>17</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Надеюсь у вас хороший денёк!</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>
@@ -415,8 +383,10 @@ class Main(QMainWindow):
         super().__init__()
         f = io.StringIO(template)
         uic.loadUi(f, self)
-        # Написан адрес для моего линукса, на винде поменять!!
-        self.con = sqlite3.connect("/home/linechangerr/projects/Keeps/databases/users_db")
+        absolute_path = os.path.dirname(__file__)
+        relative_path = 'databases/users_db'
+        full_path = os.path.join(absolute_path, relative_path)
+        self.con = sqlite3.connect(full_path)
         self.cur = self.con.cursor()
         self.add_btn.clicked.connect(self.add)
         count = 0
@@ -441,13 +411,22 @@ class Main(QMainWindow):
     def add(self):
         self.add_window = Add()
         self.add_window.show()
-        file = open('/home/linechangerr/projects/Keeps/clipboard.txt')
+        absolute_path = os.path.dirname(__file__)
+        relative_path = 'clipboard.txt'
+        full_path = os.path.join(absolute_path, relative_path)
+        file = open(full_path)
         lines = file.read().split('\n')
+        command = self.cur.execute("""INSERT INTO 
+                                   
+""")
         file.close()
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    absolute_path = os.path.dirname(__file__)
+    relative_path = 'current_user.txt'
+    full_path = os.path.join(absolute_path, relative_path)
     file = open("/home/linechangerr/projects/Keeps/current_user.txt")
     if file.read():
         ex = Main()

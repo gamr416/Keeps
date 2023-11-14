@@ -1,10 +1,12 @@
 import io
 import sys
 import os
+import sqlite3
 
-
+from PyQt5.QtCore import QDateTime
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QWidget
+from storage import global_storage
 
 
 template = """<?xml version="1.0" encoding="UTF-8"?>
@@ -165,7 +167,7 @@ template = """<?xml version="1.0" encoding="UTF-8"?>
     </font>
    </property>
    <property name="text">
-    <string>Дата</string>
+    <string>Дата(UTC)</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -184,10 +186,27 @@ class Add(QWidget):
         super().__init__()
         f = io.StringIO(template)
         uic.loadUi(f, self)
+        self.storage = global_storage
         self.add_btn.clicked.connect(self.add)
-        self.date_input
-        
+        date = QDateTime(2030, 1, 1, 1, 1)
+        self.date_input.setDateTime(date)
+        absolute_path = os.path.dirname(__file__)
+        relative_path = 'current_user.txt'
+        full_path = os.path.join(absolute_path, relative_path)
+        file = open(full_path)
+        lines = file.read().split('\n')
+        self.id = lines[0]
+        self.name = lines[1]
+        self.email = lines[2]
+        self.password = lines[3]
+        self.code = 403
+
     def add(self):
+        absolute_path = os.path.dirname(__file__)
+        relative_path = 'databases/users_db'
+        full_path = os.path.join(absolute_path, relative_path)
+        self.con = sqlite3.connect(full_path)
+        self.cur = self.con.cursor()
         error_message = ""
         if not self.title_input.text():
             error_message += "Введите заголовок!! "
@@ -195,13 +214,24 @@ class Add(QWidget):
             error_message += "Введите основной текст!! "
         self.error_label.setText(error_message)
         if not error_message:
-            absolute_path = os.path.dirname(__file__)
-            relative_path = 'clipboard.txt'
-            full_path = os.path.join(absolute_path, relative_path)
-            file = open(full_path, 'w')
-            file.write(f"{self.title_input.text()}\n{self.text_input.toPlainText()}")
-            file.close()
+            time = [int(num) for num in str(self.date_input.dateTime())[23:-1].split(', ')]
+            text = self.title_input.text() + '\n' + self.text_input.toPlainText()
+            print(1)
+            self.storage.add_note(time, text)
+            command = self.cur.execute(
+                    f"""INSERT INTO {'s' + str(self.id)}(note, date)
+                        VALUES('{text}', '{time}')"""
+                )
+            
+            self.con.commit()
+            self.con.close()
             self.close()
+            print(2)
+            
+
+
+        
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

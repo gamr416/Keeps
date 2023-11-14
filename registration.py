@@ -232,9 +232,10 @@ class Registration(QWidget):
                            '{self.email_input.text()}',
                            '{self.password_input.text()}')"""
             )
-            command_2 = cur.execute(f"""CREATE TABLE "{cur.execute(f'''SELECT id FROM 'users' WHERE name={self.name_input.text()}''').fetchall()[0]}" (
-	                                "number"	INTEGER NOT NULL UNIQUE,
-	                                "note"	text,
+            command_0 = cur.execute(f"""SELECT id FROM users WHERE email="{self.email_input.text()}" """).fetchall()[0][0]
+            command_2 = cur.execute(f"""CREATE TABLE "{'s' + str(command_0)}" (
+	                                "number"    INTEGER ,
+	                                "note"  text,
                                     "date"  text,
 	                                PRIMARY KEY("number"));"""
             )
@@ -242,7 +243,6 @@ class Registration(QWidget):
         con.close()
         self.close()
         
-
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

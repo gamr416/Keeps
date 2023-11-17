@@ -8,7 +8,6 @@ import time
 
 from sign_in import SignIn
 from add_note import Add
-from storage import global_storage
 from profile_window import Profile
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QMainWindow
@@ -371,6 +370,24 @@ p, li { white-space: pre-wrap; }
      <string/>
     </property>
    </widget>
+   <widget class="QPushButton" name="update_btn">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>211</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string> Обновить</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>
@@ -385,8 +402,7 @@ class Main(QMainWindow):
         super().__init__()
         f = io.StringIO(template)
         uic.loadUi(f, self)
-        self.storage = global_storage
-        self.add_btn.clicked.connect(self.add)
+        self.add_btn.clicked.connect(self.update)
         self.profile_btn.clicked.connect(self.profile)
         count = 0
         self.notes = [
@@ -417,13 +433,23 @@ class Main(QMainWindow):
         self.password = lines[3]
         self.name_label_2.setText(self.name)
         self.email_label.setText(self.email)
-        self.storage.set_note_add_callback(self.adding)
+        self.update_btn.clicked.connect(self.adding)
+        self.profile_btn.clicked.connect(self.profile)
 
     def add(self):
         self.add_window = Add()
         self.add_window.show()
-        self.send()
+        print('ahh')
+    
+    def update(self):
         self.adding()
+        self.send()
+        absolute_path = os.path.dirname(__file__)
+        relative_path = 'current_user.txt'
+        full_path = os.path.join(absolute_path, relative_path)
+        file = open(full_path)
+        if not file.read():
+            exit()
 
     def adding(self):
         count = 0
@@ -432,19 +458,21 @@ class Main(QMainWindow):
         full_path = os.path.join(absolute_path, relative_path)
         self.con = sqlite3.connect(full_path)
         self.cur = self.con.cursor()
+        command = self.cur.execute(f"""SELECT note FROM {'s' + str(self.id)}""").fetchall()
+        command1 = self.cur.execute(f"""SELECT date FROM {'s' + str(self.id)}""").fetchall()
+        notes = command[-1][0]
+        self.date = command1[-1][0]
         for elem in self.notes:
             if elem.toPlainText():
                 elem.hide()
                 count += 1
-        self.notes[count].show()
-        self.none_label.setText('')
+        self.notes[count % 9].show()
+        self.notes[count % 9].setText(f'{notes}\n{"".join(self.date)}')
         self.con.close()
-        
         
     def profile(self):
         profile_window = Profile()
         profile_window.show()
-
 
     def send(self):
         #отдает все заметки и даты, нужно пробегать и искать последнее, дисплей заметок не работает
@@ -459,10 +487,9 @@ class Main(QMainWindow):
         gmail_user = 'napominanie20@gmail.com'
         gmail_password = 'Dimon416'
         sent_from = gmail_user
-        to = [self.email]
+        to = self.email
         subject = 'Напоминание'
         body = note[-1][0]
-
 
 
 
@@ -472,19 +499,18 @@ class Main(QMainWindow):
         Subject: %s
 
         %s
-        """ % (sent_from, ", ".join(to), subject, body)
+        """ % (sent_from, to, subject, body)
 
         try:
             server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
             server.ehlo()
             server.login(gmail_user, gmail_password)
             server.sendmail(sent_from, to, email_text)
-            server = smtplib.SMTP ('smtp.gmail.com', 587)
             send_time = dt.datetime(tuple([i for i in date].append(0))) # set your sending time in UTC
             time.sleep(send_time.timestamp() - time.time())
-            print('Email sent!')
+            server = smtplib.SMTP ('smtp.gmail.com', 587)
         except:
-            print('я гей')
+            pass
         server.quit()
         server.close()
         self.con.close()

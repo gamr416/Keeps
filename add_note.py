@@ -6,7 +6,6 @@ import sqlite3
 from PyQt5.QtCore import QDateTime
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QWidget
-from storage import global_storage
 
 
 template = """<?xml version="1.0" encoding="UTF-8"?>
@@ -186,7 +185,6 @@ class Add(QWidget):
         super().__init__()
         f = io.StringIO(template)
         uic.loadUi(f, self)
-        self.storage = global_storage
         self.add_btn.clicked.connect(self.add)
         date = QDateTime(2030, 1, 1, 1, 1)
         self.date_input.setDateTime(date)
@@ -217,10 +215,9 @@ class Add(QWidget):
             time = [int(num) for num in str(self.date_input.dateTime())[23:-1].split(', ')]
             text = self.title_input.text() + '\n' + self.text_input.toPlainText()
             print(1)
-            self.storage.add_note(time, text)
             command = self.cur.execute(
-                    f"""INSERT INTO {'s' + str(self.id)}(note, date)
-                        VALUES('{text}', '{time}')"""
+                    f"""INSERT INTO {'s' + str(self.id)}(note, date, picture)
+                        VALUES('{text}', '{time}', '{''}')"""
                 )
             
             self.con.commit()

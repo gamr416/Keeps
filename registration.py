@@ -237,6 +237,7 @@ class Registration(QWidget):
 	                                "number"    INTEGER ,
 	                                "note"  text,
                                     "date"  text,
+                                    "picture"   text,
 	                                PRIMARY KEY("number"));"""
             )
         con.commit()

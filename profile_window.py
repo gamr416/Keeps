@@ -172,8 +172,8 @@ class Profile(QWidget):
 
     def change_pic(self):
         file_name = QFileDialog.getOpenFileName(
-        self, 'Выбрать картинку', '',
-        'Картинка (*.jpg);;Картинка (*.png);;Все файлы (*)')[0]
+            self, 'Выбрать картинку', '',
+            'Картинка (*.jpg);;Картинка (*.png);;Все файлы (*)')[0]
         if not file_name:
             return
         absolute_path = os.path.dirname(__file__)
@@ -191,13 +191,6 @@ class Profile(QWidget):
         self.profile_picture.hide()
         self.image.setPixmap(self.pixmap)
         print(2)
-
-        absolute_path = os.path.dirname(__file__)
-        relative_path = 'databases/users_db'
-        full_path = os.path.join(absolute_path, relative_path)
-        self.con = sqlite3.connect(full_path)
-        self.cur = self.con.cursor()
-        
 
     
     def quit(self):

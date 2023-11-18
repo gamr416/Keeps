@@ -186,7 +186,7 @@ class Add(QWidget):
         f = io.StringIO(template)
         uic.loadUi(f, self)
         self.add_btn.clicked.connect(self.add)
-        date = QDateTime(2030, 1, 1, 1, 1)
+        date = QDateTime(2024, 1, 1, 1, 1)
         self.date_input.setDateTime(date)
         absolute_path = os.path.dirname(__file__)
         relative_path = 'current_user.txt'

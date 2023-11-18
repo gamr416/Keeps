@@ -161,7 +161,7 @@ template = """<?xml version="1.0" encoding="UTF-8"?>
      <string notr="true">QTextBrowser{background-color: rgb(0, 145, 90);
 								  color: rgb(255, 255, 255)}</string>
     </property>
-    <property name="markdown">
+    <property name="markdown" stdset="0">
      <string/>
     </property>
    </widget>
@@ -183,15 +183,15 @@ template = """<?xml version="1.0" encoding="UTF-8"?>
      <string notr="true">QTextBrowser{background-color: rgb(160, 20, 20);
 								  color: rgb(255, 255, 255)}</string>
     </property>
-    <property name="markdown">
-     <string/>
-    </property>
     <property name="html">
      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Ubuntu';&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="markdown" stdset="0">
+     <string/>
     </property>
    </widget>
    <widget class="QTextBrowser" name="textBrowser_2">
@@ -212,15 +212,15 @@ p, li { white-space: pre-wrap; }
      <string notr="true">QTextBrowser{background-color: rgb(200, 120, 0);
 								  color: rgb(255, 255, 255)}</string>
     </property>
-    <property name="markdown">
-     <string/>
-    </property>
     <property name="html">
      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Ubuntu';&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="markdown" stdset="0">
+     <string/>
     </property>
    </widget>
    <widget class="QTextBrowser" name="textBrowser_8">
@@ -241,7 +241,7 @@ p, li { white-space: pre-wrap; }
      <string notr="true">QTextBrowser{background-color: rgb(84, 18, 128);
 								  color: rgb(255, 255, 255)}</string>
     </property>
-    <property name="markdown">
+    <property name="markdown" stdset="0">
      <string/>
     </property>
    </widget>
@@ -263,15 +263,15 @@ p, li { white-space: pre-wrap; }
      <string notr="true">QTextBrowser{background-color: rgb(196, 177, 2);
 								  color: rgb(255, 255, 255)}</string>
     </property>
-    <property name="markdown">
-     <string/>
-    </property>
     <property name="html">
      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Ubuntu';&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="markdown" stdset="0">
+     <string/>
     </property>
    </widget>
    <widget class="QTextBrowser" name="textBrowser_4">
@@ -292,15 +292,15 @@ p, li { white-space: pre-wrap; }
      <string notr="true">QTextBrowser{background-color: rgb(53, 117, 16);
 								  color: rgb(255, 255, 255)}</string>
     </property>
-    <property name="markdown">
-     <string/>
-    </property>
     <property name="html">
      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Ubuntu';&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="markdown" stdset="0">
+     <string/>
     </property>
    </widget>
    <widget class="QTextBrowser" name="textBrowser_6">
@@ -321,7 +321,7 @@ p, li { white-space: pre-wrap; }
      <string notr="true">QTextBrowser{background-color: rgb(0, 102, 145);
 								  color: rgb(255, 255, 255)}</string>
     </property>
-    <property name="markdown">
+    <property name="markdown" stdset="0">
      <string/>
     </property>
    </widget>
@@ -343,7 +343,7 @@ p, li { white-space: pre-wrap; }
      <string notr="true">QTextBrowser{background-color: rgb(48, 31, 143);
 								  color: rgb(255, 255, 255)}</string>
     </property>
-    <property name="markdown">
+    <property name="markdown" stdset="0">
      <string/>
     </property>
    </widget>
@@ -365,7 +365,7 @@ p, li { white-space: pre-wrap; }
      <string notr="true">QTextBrowser{background-color: rgb(128, 18, 86);
 								  color: rgb(255, 255, 255)}</string>
     </property>
-    <property name="markdown">
+    <property name="markdown" stdset="0">
      <string/>
     </property>
    </widget>
@@ -387,6 +387,27 @@ p, li { white-space: pre-wrap; }
      <string> Обновить</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="send_btn">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>20</y>
+      <width>231</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::StrongFocus</enum>
+    </property>
+    <property name="text">
+     <string>Отправить</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>
@@ -405,6 +426,7 @@ class Main(QMainWindow):
         self.update_btn.clicked.connect(self.update)
         self.profile = Profile()
         self.profile_btn.clicked.connect(self.profile.show)
+        self.send_btn.clicked.connect(self.send)
         count = 0
         self.notes = [
             self.textBrowser,
@@ -446,10 +468,8 @@ class Main(QMainWindow):
         full_path = os.path.join(absolute_path, relative_path)
         file = open(full_path)
         if not file.read():
-            print(file.read(), 1)
             exit()
         self.adding()
-        self.send()
 
     def adding(self):
         count = 0
@@ -470,14 +490,13 @@ class Main(QMainWindow):
         self.con.close()
 
     def send(self):
-        #отдает все заметки и даты, нужно пробегать и искать последнее, дисплей заметок не работает
         absolute_path = os.path.dirname(__file__)
         relative_path = 'databases/users_db'
         full_path = os.path.join(absolute_path, relative_path)
         self.con = sqlite3.connect(full_path)
         self.cur = self.con.cursor()
         data = self.cur.execute(f"""SELECT note, date FROM {'s' + str(self.id)}""").fetchall()
-        print(data[-1][0], data[-1][1])
+
         gmail_user = 'dim.shvalev@mail.ru'
         gmail_password = 'EnuVbVxpjH2kBShQEwKn'
         sent_from = gmail_user
@@ -497,8 +516,8 @@ Subject: %s
         server.login(gmail_user, gmail_password)
         server.sendmail(sent_from, to, email_text)
         send_time = data[-1][1].toTime_t()
-        print(send_time)
-        t = Timer(send_time, lambda:  server.sendmail(sent_from, to, email_text))
+
+        t = Timer(send_time, lambda: server.sendmail(sent_from, to, email_text))
 
         server.close()
         self.con.close()

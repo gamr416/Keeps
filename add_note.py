@@ -214,16 +214,14 @@ class Add(QWidget):
         if not error_message:
             time = [int(num) for num in str(self.date_input.dateTime())[23:-1].split(', ')]
             text = self.title_input.text() + '\n' + self.text_input.toPlainText()
-            print(1)
             command = self.cur.execute(
-                    f"""INSERT INTO {'s' + str(self.id)}(note, date, picture)
-                        VALUES('{text}', '{time}', '{''}')"""
+                    f"""INSERT INTO {'s' + str(self.id)}(note, date)
+                        VALUES('{text}', '{time}')"""
                 )
             
             self.con.commit()
             self.con.close()
             self.close()
-            print(2)
             
 
 

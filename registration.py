@@ -234,11 +234,10 @@ class Registration(QWidget):
             )
             command_0 = cur.execute(f"""SELECT id FROM users WHERE email="{self.email_input.text()}" """).fetchall()[0][0]
             command_2 = cur.execute(f"""CREATE TABLE "{'s' + str(command_0)}" (
-	                                "number"    INTEGER ,
+	                                "id"    INTEGER ,
 	                                "note"  text,
                                     "date"  text,
-                                    "picture"   text,
-	                                PRIMARY KEY("number"));"""
+	                                PRIMARY KEY("id"));"""
             )
         con.commit()
         con.close()

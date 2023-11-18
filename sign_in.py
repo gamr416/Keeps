@@ -212,27 +212,29 @@ class SignIn(QMainWindow):
             right_email = False
             if (self.email_input.text(), ) in user_data:
                     right_email = True
+                    print(1)
             if right_email:
                 user_password = self.cur.execute(f"""SELECT password FROM users 
                                                     WHERE email='{self.email_input.text()}'""").fetchall()
                 if self.password_input.text() == user_password[0][0]:
-                    pass
-                    #Открытие основного приложения
+                    command = self.cur.execute(
+                        f"""SELECT "id" FROM "users" WHERE email="{self.email_input.text()}" """).fetchall()
+                    command1 = self.cur.execute(
+                        f"""SELECT "name" FROM "users" WHERE email="{self.email_input.text()}" """).fetchall()
+                    absolute_path = os.path.dirname(__file__)
+                    relative_path = 'current_user.txt'
+                    full_path = os.path.join(absolute_path, relative_path)
+                    file = open(full_path, 'w')
+                    file.write(
+                        f'{command[0][0]}\n{command1[0][0]}\n{self.email_input.text()}\n{self.password_input.text()}\n')
+                    self.con.close()
+                    self.close()
+                    file.close()
                 else:
                     error_message += 'Пароль неверный!!'
             else:
                 error_message += 'Аккаунта не существует!!'
-        command = self.cur.execute(f"""SELECT "id" FROM "users" WHERE email="{self.email_input.text()}" """).fetchall()
-        command1 = self.cur.execute(f"""SELECT "name" FROM "users" WHERE email="{self.email_input.text()}" """).fetchall()
-        absolute_path = os.path.dirname(__file__)
-        relative_path = 'current_user.txt'
-        full_path = os.path.join(absolute_path, relative_path)
-        file = open(full_path, 'w')
-        file.write(f'{command[0][0]}\n{command1[0][0]}\n{self.email_input.text()}\n{self.password_input.text()}')
         self.error_label.setText(error_message)
-        self.con.close()
-        self.close()
-        file.close()
         
     def open_register_window(self):
         self.register_window = Registration()

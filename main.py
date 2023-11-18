@@ -3,9 +3,8 @@ import sys
 import sqlite3
 import os
 import smtplib
-import datetime as dt
-import time
 
+from threading import Timer
 from sign_in import SignIn
 from add_note import Add
 from profile_window import Profile
@@ -402,8 +401,10 @@ class Main(QMainWindow):
         super().__init__()
         f = io.StringIO(template)
         uic.loadUi(f, self)
-        self.add_btn.clicked.connect(self.update)
-        self.profile_btn.clicked.connect(self.profile)
+        self.add_btn.clicked.connect(self.add)
+        self.update_btn.clicked.connect(self.update)
+        self.profile = Profile()
+        self.profile_btn.clicked.connect(self.profile.show)
         count = 0
         self.notes = [
             self.textBrowser,
@@ -433,23 +434,22 @@ class Main(QMainWindow):
         self.password = lines[3]
         self.name_label_2.setText(self.name)
         self.email_label.setText(self.email)
-        self.update_btn.clicked.connect(self.adding)
-        self.profile_btn.clicked.connect(self.profile)
+        self.update_btn.clicked.connect(self.update)
 
     def add(self):
         self.add_window = Add()
         self.add_window.show()
-        print('ahh')
     
     def update(self):
-        self.adding()
-        self.send()
         absolute_path = os.path.dirname(__file__)
         relative_path = 'current_user.txt'
         full_path = os.path.join(absolute_path, relative_path)
         file = open(full_path)
         if not file.read():
+            print(file.read(), 1)
             exit()
+        self.adding()
+        self.send()
 
     def adding(self):
         count = 0
@@ -458,21 +458,16 @@ class Main(QMainWindow):
         full_path = os.path.join(absolute_path, relative_path)
         self.con = sqlite3.connect(full_path)
         self.cur = self.con.cursor()
-        command = self.cur.execute(f"""SELECT note FROM {'s' + str(self.id)}""").fetchall()
-        command1 = self.cur.execute(f"""SELECT date FROM {'s' + str(self.id)}""").fetchall()
-        notes = command[-1][0]
-        self.date = command1[-1][0]
-        for elem in self.notes:
-            if elem.toPlainText():
-                elem.hide()
-                count += 1
-        self.notes[count % 9].show()
-        self.notes[count % 9].setText(f'{notes}\n{"".join(self.date)}')
+        command = self.cur.execute(f"""SELECT note, date FROM {'s' + str(self.id)}""").fetchall()
+        if command:
+            self.none_label.setText('')
+            for i in range(len(command)):
+                self.notes[i].setText(f"{command[i][0]}\n{''.join(command[i][1])[1:-1]}")
+                if self.notes[i].toPlainText() != '':
+                    self.notes[i].show()
+                else:
+                    self.notes[i].hide()
         self.con.close()
-        
-    def profile(self):
-        profile_window = Profile()
-        profile_window.show()
 
     def send(self):
         #отдает все заметки и даты, нужно пробегать и искать последнее, дисплей заметок не работает
@@ -481,40 +476,32 @@ class Main(QMainWindow):
         full_path = os.path.join(absolute_path, relative_path)
         self.con = sqlite3.connect(full_path)
         self.cur = self.con.cursor()
-        note = self.cur.execute(f"""SELECT note FROM {'s' + str(self.id)}""").fetchall()
-        date = self.cur.execute(f"""SELECT date FROM {'s' + str(self.id)}""").fetchall()
-        print(note[-1][0], date[-1][0])
-        gmail_user = 'napominanie20@gmail.com'
-        gmail_password = 'Dimon416'
+        data = self.cur.execute(f"""SELECT note, date FROM {'s' + str(self.id)}""").fetchall()
+        print(data[-1][0], data[-1][1])
+        gmail_user = 'dim.shvalev@mail.ru'
+        gmail_password = 'EnuVbVxpjH2kBShQEwKn'
         sent_from = gmail_user
         to = self.email
-        subject = 'Напоминание'
-        body = note[-1][0]
-
-
+        subject = 'Reminder'.encode('utf-8')
+        body = data[-1][0].encode('utf-8')
 
         email_text = """\
-        From: %s
-        To: %s
-        Subject: %s
+From: %s
+To: %s
+Subject: %s
+%s
+""" % (sent_from, to, subject, body)
 
-        %s
-        """ % (sent_from, to, subject, body)
+        server = smtplib.SMTP_SSL('smtp.mail.ru', 465)
+        server.ehlo()
+        server.login(gmail_user, gmail_password)
+        server.sendmail(sent_from, to, email_text)
+        send_time = data[-1][1].toTime_t()
+        print(send_time)
+        t = Timer(send_time, lambda:  server.sendmail(sent_from, to, email_text))
 
-        try:
-            server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-            server.ehlo()
-            server.login(gmail_user, gmail_password)
-            server.sendmail(sent_from, to, email_text)
-            send_time = dt.datetime(tuple([i for i in date].append(0))) # set your sending time in UTC
-            time.sleep(send_time.timestamp() - time.time())
-            server = smtplib.SMTP ('smtp.gmail.com', 587)
-        except:
-            pass
-        server.quit()
         server.close()
         self.con.close()
-
 
 
 if __name__ == "__main__":
